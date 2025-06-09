@@ -78,6 +78,7 @@ Parameters:
     Type: String
 
   CrossAccountRoleName: 
+    Default: ''
     Type: String
     Description: "Your Role Name (ex: OrganizationAccountAccessRole); This will need to be the same across all of the Member Accounts"
 
@@ -467,12 +468,12 @@ Resources:
     Type: AWS::S3::Bucket
     Condition: CreateWeb
     Properties:
-      BucketName: !Join ["-", [!Ref WebsiteS3BucketName, "log"]]
+      BucketName: !Join ["-", [!Ref WebsiteS3Bucket, "log"]]
       OwnershipControls:
         Rules:
           - ObjectOwnership: BucketOwnerPreferred
       IntelligentTieringConfigurations:
-        - Id: !Join ["-", [!Ref WebsiteS3BucketName, "log"]]
+        - Id: !Join ["-", [!Ref WebsiteS3Bucket, "log"]]
           Status: Enabled
           Tierings:
             - AccessTier: ARCHIVE_ACCESS
